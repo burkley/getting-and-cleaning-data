@@ -14,6 +14,7 @@ This project analyzed data from a study on [Human Activity Recognition Using Sma
 Commercial companies, such as Nike, are developing big data analytics to perform [Pattern-of-life analysis](https://en.wikipedia.org/wiki/Pattern-of-life_analysis) based on consumer activity.  This study is one such example.
 
 ***
+***
 
 ### Data
 
@@ -24,8 +25,11 @@ The sensor signals (accelerometer and gyroscope) were pre-processed by applying 
 Additional information on the data is available [here](http://archive.ics.uci.edu/ml/machine-learning-databases/00240/UCI%20HAR%20Dataset.names).
 
 ***
+***
 
 ### Variables
+
+The tidy data set includes both *time domain* and *frequency domain* variables.  Time domain variables, prefixed with a "t", are either measurements or derived from measurements taken "in real time".  This is the most natural way to think about measuring "real world events".  Frequency domain variables, prefixed with a "f" are the result of *Digital Signal Processing* signal techniques.
 
 The following variables appear in the tidy data set:
 
@@ -34,15 +38,40 @@ The following variables appear in the tidy data set:
 1. Subject, The subject identifier, range 1 to 30 inclusive.
 2. Activity, The activity, one of WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING
 
-#### Variables from the raw data set
+#### Variables that are included from the raw data set
 
 3. tBodyAccmeanX, tBodyAccmeanY, tBodyAccmeanZ, tBodyAccstdX, tBodyAccstdY, tBodyAccstdZ, tGravityAccmeanX,tGravityAccmeanY, tGravityAccmeanZ, tGravityAccstdX, tGravityAccstdY, tGravityAccstdZ, tBodyAccJerkmeanX, tBodyAccJerkmeanY, tBodyAccJerkmeanZ, tBodyAccJerkstdX, tBodyAccJerkstdY, tBodyAccJerkstdZ, tBodyGyromeanX, tBodyGyromeanY, tBodyGyromeanZ, tBodyGyrostdX, tBodyGyrostdY, tBodyGyrostdZ, tBodyGyroJerkmeanX, tBodyGyroJerkmeanY, tBodyGyroJerkmeanZ, tBodyGyroJerkstdX, tBodyGyroJerkstdY, tBodyGyroJerkstdZ, tBodyAccMagmean, tBodyAccMagstd, tGravityAccMagmean, tGravityAccMagstd, tBodyAccJerkMagmean, tBodyAccJerkMagstd, tBodyGyroMagmean, tBodyGyroMagstd, tBodyGyroJerkMagmean, tBodyGyroJerkMagstd, fBodyAccmeanX, fBodyAccmeanY, fBodyAccmeanZ, fBodyAccstdX, fBodyAccstdY, fBodyAccstdZ, fBodyAccmeanFreqX, fBodyAccmeanFreqY, fBodyAccmeanFreqZ, fBodyAccJerkmeanX, fBodyAccJerkmeanY, fBodyAccJerkmeanZ, fBodyAccJerkstdX, fBodyAccJerkstdY, fBodyAccJerkstdZ, fBodyAccJerkmeanFreqX, fBodyAccJerkmeanFreqY, fBodyAccJerkmeanFreqZ, fBodyGyromeanX, fBodyGyromeanY, fBodyGyromeanZ, fBodyGyrostdX, fBodyGyrostdY, fBodyGyrostdZ, fBodyGyromeanFreqX, fBodyGyromeanFreqY, fBodyGyromeanFreqZ, fBodyAccMagmean, fBodyAccMagstd, fBodyAccMagmeanFreq, fBodyBodyAccJerkMagmean, fBodyBodyAccJerkMagstd, fBodyBodyAccJerkMagmeanFreq, fBodyBodyGyroMagmean, fBodyBodyGyroMagstd, fBodyBodyGyroMagmeanFreq, fBodyBodyGyroJerkMagmean, fBodyBodyGyroJerkMagstd, fBodyBodyGyroJerkMagmeanFreq
 
+
+#### Variables that are not included from the raw data set
+
+4. angle(tBodyAccMean,gravity), angle(tBodyAccJerkMean),gravityMean), angle(tBodyGyroMean,gravityMean), angle(tBodyGyroJerkMean,gravityMean), angle(X,gravityMean), angle(Y,gravityMean), angle(Z,gravityMean)
+
+Rationale (for exclusion): Not directly related to a raw measurement.
+
+***
 ***
 
 ### Transformations
 
+The following transformations were performed on the raw data set:
 
+1. Preparation of features
+ - Remove all parentheses, both left '(' and right ')', from the features.
+ - Remove all dashes '-' from the features.
+ - Remove all commas ',' from the features.
+
+2. Preparation of activity labels
+ - The numeric codes from the activities are replaced with labels that are defined in the activity labels file.
+
+3. The prepared features are used to name the variables of the tidy data set.
+
+4. Unwanted variables are pruned from the tidy data set.  Varialbes that represent mean and standard deviation values are retained.
+
+5. The the subjects, activity labels, and data are combined (in that order) to create a tidy data set from the (raw) data set.
+
+
+***
 ***
 
 ###Sources

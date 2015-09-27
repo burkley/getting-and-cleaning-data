@@ -171,8 +171,8 @@ util_prepare_raw_data_set_for_merge <- function(activity_labels_filename,
         # prune the variables that are not mean or std        
         data <- data[ ,
                      sort(
-                             c(grep("mean", names(data), ignore.case=TRUE),
-                               grep("std", names(data), ignore.case=TRUE)
+                             c(grep("mean", names(data), ignore.case=FALSE),
+                               grep("std", names(data), ignore.case=FALSE)
                                )
                          )
                     ]
@@ -198,8 +198,6 @@ util_prepare_raw_data_set_for_merge <- function(activity_labels_filename,
 ##   1) Remove all parentheses, both left '(' and right ')', from the features.
 ##   2) Remove all dashes '-' from the features.
 ##   3) Remove all commas ',' from the features.
-##   4) Change all occurrences of 'mean' to 'Mean'
-##   5) Change all occurrences of 'std' to 'Std'
 ##
 ## Arguments
 ##   features_filename           List of all features.
@@ -214,8 +212,6 @@ util_prepare_features <- function(features_filename) {
         features_as_chars <- gsub("\\)", "", features_as_chars)
         features_as_chars <- gsub("-", "", features_as_chars)
         features_as_chars <- gsub(",", "", features_as_chars)
-        features_as_chars <- gsub("mean", "Mean", features_as_chars)
-        features_as_chars <- gsub("std", "Std", features_as_chars)
 }
 
 

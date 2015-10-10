@@ -251,7 +251,8 @@ util_prepare_activity <- function(activity_labels_filename,
 ##
 ## Function util_check_for_data
 ##
-## This 
+## This function will download and unzip the project data file if necessary.
+##
 util_check_for_data <- function(verbose=FALSE) {
         data_dir <- "data"
         if(!file.exists("data")) {

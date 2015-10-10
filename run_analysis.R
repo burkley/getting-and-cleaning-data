@@ -17,6 +17,9 @@
 ## default location.
 ##
 run_analysis <- function() {
+        # download the data if necessary
+        util_check_for_data(verbose=TRUE)
+
         # call do_run_analysis to do the actual work.
         # designing the program this way (by passing the names of the data files into do_run_analysis)
         # allows flexibility if the data files are not in their standard location.
@@ -245,3 +248,26 @@ util_prepare_activity <- function(activity_labels_filename,
         activity
 }
 
+##
+## Function util_check_for_data
+##
+## This 
+util_check_for_data <- function(verbose=FALSE) {
+        data_dir <- "data"
+        if(!file.exists("data")) {
+                if(verbose) {print("Creating directory")}
+                dir.create("data")
+        }
+        zip_file <- "data/UCI HAR Dataset.zip"
+        if(!file.exists(zip_file)) {
+                if (verbose) {print("Downloading data file")}
+                file_url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+                download.file(file_url, destfile=zip_file, method="curl")
+        }
+        # unzip the project data in the current working directory
+        project_data <- "UCI HAR Dataset"
+        if(!file.exists(project_data)) {
+                if (verbose) {print("Unzipping data")}
+                unzip(zip_file)
+        }
+}
